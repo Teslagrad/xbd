@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>小笨蛋</title>
+<link rel="stylesheet" href="../addons/xbd_activity/template/mobile/css/common.css">
+<style>
+@media screen and (max-width:320px){body{margin:0;padding:0;width:100%;background:#ccc}#bodybox{position:relative;margin:0 auto;background:url(../addons/xbd_activity/template/mobile/images/bg1.jpg) no-repeat;background-size:100% 100%;overflow:hidden;max-width:480px}}@media screen and (min-width:321px){html,body{margin:0;padding:0;width:100%;height:100%;background:#ccc}#bodybox{position:relative;margin:0 auto;height:100%;background:url(../addons/xbd_activity/template/mobile/images/bg1.jpg) no-repeat;background-size:100% 100%;overflow:hidden;max-width:480px}}
+@keyframes yinfu2-animation{0%{transform:rotateZ(-20deg);-ms-transform:rotateZ(-20deg);-moz-transform:rotateZ(-20deg);-webkit-transform:rotateZ(-20deg);-o-transform:rotateZ(-20deg)}50%{transform:rotateZ(10deg);-ms-transform:rotateZ(10deg);-moz-transform:rotateZ(10deg);-webkit-transform:rotateZ(10deg);-o-transform:rotateZ(10deg)}}@-webkit-keyframes yinfu2-animation{0%,to{transform:rotateZ(-20deg);-ms-transform:rotateZ(-20deg);-moz-transform:rotateZ(-20deg);-webkit-transform:rotateZ(-20deg);-o-transform:rotateZ(-20deg)}50%{transform:rotateZ(10deg);-ms-transform:rotateZ(10deg);-moz-transform:rotateZ(10deg);-webkit-transform:rotateZ(10deg);-o-transform:rotateZ(10deg)}to{transform:rotateZ(-20deg);-ms-transform:rotateZ(-20deg);-moz-transform:rotateZ(-20deg);-webkit-transform:rotateZ(-20deg);-o-transform:rotateZ(-20deg)}}@keyframes yinfu1-animation{0%{transform:translateY(0);-ms-transform:translateY(0);-moz-transform:translateY(0);-webkit-transform:translateY(0);-o-transform:translateY(0)}50%{transform:translateY(-50%);-ms-transform:translateY(-50%);-moz-transform:translateY(-50%);-webkit-transform:translateY(-50%%);-o-transform:translateY(-50%)}}@-webkit-keyframes yinfu1-animation{0%,to{transform:translateY(0);-ms-transform:translateY(0);-moz-transform:translateY(0);-webkit-transform:translateY(0);-o-transform:translateY(0)}50%{transform:translateY(-50%);-ms-transform:translateY(-50%);-moz-transform:translateY(-50%);-webkit-transform:translateY(-50%%);-o-transform:translateY(-50%)}to{transform:translateY(0);-ms-transform:translateY(0);-moz-transform:translateY(0);-webkit-transform:translateY(0);-o-transform:translateY(0)}}
+.eggDiv{margin-top: 60%;position: relative}
+.indexLogo{width: 70%;margin-left: 10%}
+.fire{position: absolute;top: 18%;width: 35px}
+.leftFire{left: 38%}
+.rightFire{right: 38%}
+.start{width: 50%;position: absolute;left: 25%;top: 68%}
+#rule{width: 40%;margin-left: 30%;margin-top: 10%;z-index: 99}
+#ruleDiv{position: fixed;top: 0;width: 100%;height: 100%;background:url(../addons/xbd_activity/template/mobile/images/haibg.jpg) no-repeat;background-size: 100% 100%;max-width: 480px}
+#ruleDiv>div{position: relative;height: 100%;text-align: center}
+.ruleCon{width: 90%;margin-top: 10%}
+#back{width: 60%;position: absolute;bottom: 0;left:20%}
+.point1{width: 10%;position: absolute;top: 45%;left: 5%;animation:yinfu1-animation 1s linear infinite;-moz-animation:yinfu1-animation 1s linear infinite;-webkit-animation:yinfu1-animation 1s linear infinite;-o-animation:yinfu1-animation 1s linear infinite}
+.point2{width: 13%;position: absolute;top: 5%;left: 23%;animation:yinfu2-animation 1s linear infinite;-moz-animation:yinfu2-animation 1s linear infinite;-webkit-animation:yinfu2-animation 1s linear infinite;-o-animation:yinfu2-animation 1s linear infinite}
+.point3{width: 9%;position: absolute;top: 7%;right: 3%;animation:yinfu1-animation 1s linear infinite;-moz-animation:yinfu1-animation 1s linear infinite;-webkit-animation:yinfu1-animation 1s linear infinite;-o-animation:yinfu1-animation 1s linear infinite}
+@media screen and (min-width: 321px) and (max-width: 374px) {
+    .leftFire{left: 39%}
+    .rightFire{right: 39%}
+    .fire{top: 21%}
+}
+@media screen and (min-width: 375px) and (max-width: 413px) {
+    .start{top: 68%}
+    .eggDiv{margin-top: 63%}
+    .fire{top: 20%}
+    .leftFire{left: 39%}
+    .rightFire{right: 39%}
+}
+@media screen and (min-width: 414px) {
+    .start{top: 66%}
+    .eggDiv{margin-top: 67%}
+    .fire{top: 22%}
+    .leftFire{left: 39.5%}
+    .rightFire{right: 39.5%}
+}
+@media screen and (min-width: 480px) {
+    .start{top: 75%}
+    #rule{margin-top: 5%}
+}
+.start:active{width: 54%;left: 23%}
+#rule:active{width: 44%;margin-left: 28%}
+#back:active{width: 64%;left:18%;}
+*{-webkit-tap-highlight-color:rgba(0,0,0,0)}
+</style>
+</head>
+<body>
+<div id="bodybox">
+    <div class="load" id="load"><img src="../addons/xbd_activity/template/mobile/images/load.gif"><div class="txtAC"><img src="../addons/xbd_activity/template/mobile/images/load.png"></div></div>
+    <div class="none" id="main">
+        <img class="point1" src="../addons/xbd_activity/template/mobile/images/point1.png"/>
+        <img class="point2" src="../addons/xbd_activity/template/mobile/images/point2.png"/>
+        <img class="point3" src="../addons/xbd_activity/template/mobile/images/point3.png"/>
+
+        <div class="eggDiv">
+            <img class="indexLogo" src="../addons/xbd_activity/template/mobile/images/egg.gif"/>
+            <img class="leftFire fire" src="../addons/xbd_activity/template/mobile/images/left.gif"/>
+            <img class="rightFire fire" src="../addons/xbd_activity/template/mobile/images/right.gif"/>
+        </div>
+        <a href="{php echo $this->createMobileUrl('zihai', array('hid' => $hid,'pageid'=>2), true)}"><img class="start" src="../addons/xbd_activity/template/mobile/images/start.png"/></a>
+        <img id="rule" src="../addons/xbd_activity/template/mobile/images/rule.png"/>
+        <div class="none" id="ruleDiv">
+        <div>
+            <img class="ruleCon" src="../addons/xbd_activity/template/mobile/images/ruleCon.png"/>
+            <img id="back" src="../addons/xbd_activity/template/mobile/images/back.png">
+        </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var a = document.getElementsByTagName('a');
+var img = document.getElementsByTagName('img');
+for(var i = 0; i < a.length; i++){
+  a[i].addEventListener('touchstart',function(){},false);
+}
+for(var i = 0; i < img.length; i++){
+  img[i].addEventListener('touchstart',function(){},false);
+}
+</script>
+<script>
+window.onload = function(){
+    setTimeout(function(){
+        document.getElementById("load").style.display = "none";
+        document.getElementById("main").style.display = "block";
+
+        var width = document.documentElement.clientWidth;
+        if(width <= 320){
+          var height = 1010 * (width / 640);
+          document.getElementById("bodybox").style.height = Math.floor(height) + 'px';
+        }
+
+        var rule = document.getElementById("rule");
+        var ruleDiv = document.getElementById("ruleDiv");
+        rule.onclick = function(){
+            ruleDiv.style.display = "block";
+        }
+        ruleDiv.onclick = function(){
+            ruleDiv.style.display = "none";
+        }
+    },700);
+}
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);} || { jsApiList:[] };
+    // 是否启用调试
+    jssdkconfig.debug = false;
+
+    // 已经注册了 jssdk 文档中所有的接口
+    jssdkconfig.jsApiList = [
+      'checkJsApi',
+      'onMenuShareTimeline',
+      'onMenuShareAppMessage',
+      'onMenuShareQQ',
+      'onMenuShareWeibo',
+      'showOptionMenu'
+    ];          
+
+    wx.config(jssdkconfig);
+    wx.ready(function () {
+      wx.showOptionMenu();
+      //朋友
+      wx.onMenuShareAppMessage({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+         //   transfer(1);
+        }
+      });
+
+      //朋友圈
+      wx.onMenuShareTimeline({
+        title : "{$huodong['sharefriendtitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharefriendtitle']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+          //  transfer(2);
+        }
+      });
+      wx.onMenuShareQQ({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+          //  transfer(3);
+        }
+      });
+      wx.onMenuShareWeibo({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+         //   transfer(4);
+        }
+      });
+    });
+    wx.error(function (res) {
+      alert(res.errMsg);
+    });
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?6bf0ece0158b157ed325a3d8c0b75b35";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</body>
+</html>

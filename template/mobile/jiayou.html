@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>小笨蛋</title>
+<link rel="stylesheet" href="../addons/xbd_activity/template/mobile/css/common.css">
+<style>
+@media screen and (max-width:320px){body{margin:0;padding:0;width:100%;background:#fff}#bodybox{position:relative;margin:0 auto;background:url(../addons/xbd_activity/template/mobile/images/bg2.jpg) no-repeat;background-size:100% 100%;overflow:hidden;max-width:480px}}@media screen and (min-width:321px){html,body{margin:0;padding:0;width:100%;height:100%;background:#fff}#bodybox{position:relative;margin:0 auto;height:100%;background:url(../addons/xbd_activity/template/mobile/images/bg2.jpg) no-repeat;background-size:100% 100%;overflow:hidden;max-width:480px}}
+.head{margin-top: 15%}
+.head>img{width: 25%;border-radius: 50%;-webkit-box-shadow:0 0 10px #000;box-shadow:0 0 10px #000}
+.nickname{padding: 10px 0;font-size: 20px;font-weight: bolder}
+.tips{width: 77%;margin: 10% auto 0 auto;font-size: 18px;}
+.fonttype{font-family:Hanzipen;}
+.fontcolor{color: #0066FF;}
+#surebtn{width: 43%;position: absolute;left: 5%;margin-bottom: 1%}
+#bangdanbtn{width: 43%;position: absolute;right: 5%;margin-bottom: 1%}
+.egg{position: absolute;right: -1%;top: 23%;width: 40%}
+/**/
+.container {
+  width: 60%;
+  height: 45px;
+  margin-left: 5%;margin-top: 2%;
+  padding-top: 4.1%;padding-left: 3%;
+  background: url(../addons/xbd_activity/template/mobile/images/du1.png) no-repeat;
+  background-size: 100% 100%;
+}
+.progress {
+  width: 90%;
+  position: relative;
+}
+.arrow {
+  position: absolute;
+  width: 15px;
+  top: -20px;
+  left: 0;
+}
+.progress-img {
+  position: relative;
+  float: left;
+  margin: 1px -1px;
+  height: 15px;
+  /*line-height: 10px;*/
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px
+}
+.progress-img:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 15px;
+  background: url("../addons/xbd_activity/template/mobile/images/du.png") 0 0 repeat-x;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px
+}
+@media screen and(min-width: 321px) and(max-width: 374px){
+.progress-img{height: 18px}
+.progress-img:before{height: 18px}
+}
+@media screen and (min-width: 375px) and (max-width: 413px) {
+    .egg{top: 21%}
+.progress-img{height: 15px}
+.progress-img:before{height: 15px}
+}
+@media screen and (min-width: 414px) {
+    .egg{top: 19%}
+.container {padding-top: 3.2%}
+.progress-img{height: 16px}
+.progress-img:before{height: 16px}
+}
+@media screen and (min-width: 480px) {
+.progress-img{height: 24px}
+.progress-img:before{height: 24px}
+}
+#surebtn:active{width: 44%;margin-left: 5%}
+#bangdanbtn:active{width: 44%;margin-right: 5%}
+
+.duNum{position: absolute;left: 42%;top: 15.5%;font-size: 20px;font-family:Hanzipen}
+.scrollDiv{height: 85%;overflow-y: scroll;position: relative;}
+.du1{width: 100%}
+.bang{width: 100%;margin-top: 35%}
+.share{position: fixed;max-width: 480px;top: 0;width: 100%;height: 100%;background-color: rgba(0,0,0,.8)}
+.share>img{width: 80%;margin-top: 15%}
+.rankDiv{width: 80%;margin: 0 auto;margin-bottom: 10%;}
+.rankCon{width: 90%;margin: 0 auto;margin-bottom: 7px}
+.rankCon>img{height: 35px;border-radius: 50%}
+.rankCon>div{height: 35px;line-height: 35px}
+.rankname{width: 45%;margin-left:7%}
+.rankdu{width: 25%}
+.ask{width: 50%;position: absolute;left: 23%;bottom: 2%}
+.tohai{width: 50%;position: absolute;right: 3%;bottom: 7%}
+/*rule*/
+#rule{width: 20%;position: absolute;left:13%;bottom: 12%}
+#rule:active{width: 44%}
+#dandan{width: 20%;position: absolute;right:13%;bottom: 12%}
+#dandan:active{width: 44%}
+#ruleDiv{position: fixed;top: 0;width: 100%;height: 100%;background:url(../addons/xbd_activity/template/mobile/images/haibg.jpg) no-repeat;background-size: 100% 100%;max-width: 480px}
+#ruleDiv>div{position: relative;height: 100%;text-align: center}
+.ruleCon{width: 90%;margin-top: 10%}
+#back{width: 60%;position: absolute;bottom: 0;left:20%}
+#main{height: 100%}
+#bangdan{height: 100%}
+*{-webkit-tap-highlight-color:rgba(0,0,0,0)}
+</style>
+</head>
+<body>
+<div id="bodybox">
+    <div class="load" id="load"><img src="../addons/xbd_activity/template/mobile/images/load.gif"><div class="txtAC"><img src="../addons/xbd_activity/template/mobile/images/load.png"></div></div>
+    <div class="none" id="main">
+        <div class="txtAC head"><img src="{$transfer_attender['headimgurl']}"/></div>
+        <div class="txtAC nickname">{$transfer_attender['nickname']}</div>
+        <section class="container">
+          <div class="progress">
+            <span class="progress-img" style="width:0%;"></span>
+            <img class="arrow" src="../addons/xbd_activity/template/mobile/images/arrow.png" />
+          </div>
+        </section>
+
+        <img class="egg"/>
+        <div class="tips">
+              <span class="fonttype">你成功为</span>
+              <span class="fontcolor">{$transfer_attender['nickname']}</span>
+              <span class="fonttype">{if $valNum>0}加温{else}减温{/if}{$valNum1}度,TA离100度免单还差{$remaindegree}度。</span>
+        </div>
+    
+    <a href="{php echo $this->createMobileUrl('bangdan2', array('hid' => $hid,'pageid'=>6), true)}"><img id="surebtn" src="../addons/xbd_activity/template/mobile/images/play.png"/></a>
+        <img id="bangdanbtn" src="http://wevein.qiniudn.com/xbd_activity5/template/mobile/images/bangdan.png"/>
+        <img id="rule" src="http://wevein.qiniudn.com/xbd_activity3/template/mobile/images/rule.png"/>
+        <a href="http://sale.jd.com/m/act/UWzTKdjYvmEQM.html"><img id="dandan" src="http://wevein.qiniudn.com/xbd_activity3/template/mobile/images/dandan.png"/></a>
+    </div>
+  <div class="none" id="bangdan">
+        <div class="scrollDiv">
+
+            <div class="rankDiv">
+                <img class="bang" src="http://wevein.qiniudn.com/xbd_activity5/template/mobile/images/bang1.png"/>
+                <!-- loop begin -->
+                {loop $records $r}
+                <div class="rankCon ovfl">
+                    <img class="floL" src="{$r['friend']['headimgurl']}"/>
+                    <div class="floL rankname nowrap">{$r['friend']['nickname']}</div>
+                    <div class="floR rankdu nowrap">{if $r['degree']>0}+{$r['degree']}{else}{$r['degree']}{/if}℃</div>
+                </div>
+                {/loop}
+            </div>
+        </div>
+        <img class="ask" id="ask" src="http://wevein.qiniudn.com/xbd_activity5/template/mobile/images/back.png"/>
+    </div>
+    <!-- rule begin -->
+    <div class="none" id="ruleDiv"><div><img class="ruleCon" src="../addons/xbd_activity/template/mobile/images/ruleCon.png"/><img id="back" src="../addons/xbd_activity/template/mobile//images/back.png"></div></div>
+    <!-- end -->
+</div>
+<script type="text/javascript">
+var a = document.getElementsByTagName('a');
+var img = document.getElementsByTagName('img');
+for(var i = 0; i < a.length; i++){
+  a[i].addEventListener('touchstart',function(){},false);
+}
+for(var i = 0; i < img.length; i++){
+  img[i].addEventListener('touchstart',function(){},false);
+}
+</script>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script>
+window.onload = function(){
+    setTimeout(function(){
+        document.getElementById("load").style.display = "none";
+        document.getElementById("main").style.display = "block";
+        var width = document.documentElement.clientWidth;
+        if(width <= 320){
+          var height = 1010 * (width / 640);
+          document.getElementById("bodybox").style.height = Math.floor(height) + 'px';
+        }
+        // 温标指示度数
+        var egg = document.getElementsByClassName("egg")[0];
+        var num = {$transfer_attender["degree"]};
+        loading(num);
+        if(num<30){
+            egg.src = "../addons/xbd_activity/template/mobile/images/egg1.gif";
+        }else if(num>=30 && num<40){
+            egg.src = "../addons/xbd_activity/template/mobile/images/egg2.gif";
+        }else if(num>=40 && num<50){
+            egg.src = "../addons/xbd_activity/template/mobile/images/egg3.gif";
+        }else if(num>=50 && num<70){
+            egg.src = "../addons/xbd_activity/template/mobile/images/egg4.gif";
+        }else if(num>=70 && num<100){
+            egg.src = "../addons/xbd_activity/template/mobile/images/egg5.gif";
+        }else if(num == 100){
+            egg.src = "../addons/xbd_activity/template/mobile/images/egg6.gif";
+        }
+
+        function loading(percent){
+            $('.progress-img').animate({width:parseInt(percent)+5+"%"},1000);
+            if(parseInt(percent)==0){
+                $(".arrow").animate({left:(parseInt(percent)+"%")},1000);
+            }else{
+                $(".arrow").animate({left:(parseInt(percent)-2+"%")},1000);
+            }
+        }
+        // 
+        var bangdanbtn = document.getElementById("bangdanbtn");
+        var bangdan = document.getElementById("bangdan");
+        var main = document.getElementById("main");
+        
+        bangdanbtn.onclick = function(){
+            bangdan.style.display = "block";
+            main.style.display = "none";
+        }
+        bangdan.onclick = function(){
+            bangdan.style.display = "none";
+            main.style.display = "block";
+        }
+        // 
+        var rule = document.getElementById("rule");
+        var ruleDiv = document.getElementById("ruleDiv");
+        rule.onclick = function(){
+            ruleDiv.style.display = "block";
+        }
+        ruleDiv.onclick = function(){
+            ruleDiv.style.display = "none";
+        }
+    },700);
+}
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);} || { jsApiList:[] };
+    // 是否启用调试
+    jssdkconfig.debug = false;
+
+    // 已经注册了 jssdk 文档中所有的接口
+    jssdkconfig.jsApiList = [
+      'checkJsApi',
+      'onMenuShareTimeline',
+      'onMenuShareAppMessage',
+      'onMenuShareQQ',
+      'onMenuShareWeibo',
+      'showOptionMenu'
+    ];          
+
+    wx.config(jssdkconfig);
+    wx.ready(function () {
+      wx.showOptionMenu();
+      //朋友
+      wx.onMenuShareAppMessage({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+         //   transfer(1);
+        }
+      });
+
+      //朋友圈
+      wx.onMenuShareTimeline({
+        title : "{$huodong['sharefriendtitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharefriendtitle']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+          //  transfer(2);
+        }
+      });
+      wx.onMenuShareQQ({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+          //  transfer(3);
+        }
+      });
+      wx.onMenuShareWeibo({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+         //   transfer(4);
+        }
+      });
+    });
+
+    function transfer(type) {
+        $.ajax({
+            url:"<?php echo $this->createMobileUrl('transfer',array ('hid' => $hid, 'weid' => $weid, 'sharetime'=>$sharetime))?>",
+            data:{'type':type},
+            type:'post',
+            dataType:'text',
+            success:function(msg){
+            }
+        });
+    }
+
+    wx.error(function (res) {
+      alert(res.errMsg);
+    });
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?6bf0ece0158b157ed325a3d8c0b75b35";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</body>
+</html>

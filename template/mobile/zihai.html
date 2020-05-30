@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>小笨蛋</title>
+<link rel="stylesheet" href="../addons/xbd_activity/template/mobile/css/common.css">
+<script type="text/javascript" src="../addons/xbd_activity/template/mobile/js/jQuery.js"></script>
+<style>
+@media screen and (max-width:320px){body{margin:0;padding:0;width:100%;background:#fff}#bodybox{position:relative;margin:0 auto;background:url(../addons/xbd_activity/template/mobile/images/bg2.jpg) no-repeat;background-size:100% 100%;overflow:hidden;max-width:480px}}@media screen and (min-width:321px){html,body{margin:0;padding:0;width:100%;height:100%;background:#fff}#bodybox{position:relative;margin:0 auto;height:100%;background:url(../addons/xbd_activity/template/mobile/images/bg2.jpg) no-repeat;background-size:100% 100%;overflow:hidden;max-width:480px}}
+.hangfu{width: 100%;margin-top: 17%}
+.du1{width: 60%;margin-left: 8%}
+.zhaoji{width: 56%;margin-left: 22%;margin-top: 15%}
+.ask{width: 50%;position: absolute;left: 3%;top: 70%}
+.tohai{width: 50%;position: absolute;right: 5%;top: 69.5%}
+.share{position: fixed;top: 0;width: 100%;height: 100%;background-color: rgba(0,0,0,.8);max-width: 480px}
+.share>img{width: 80%;margin-top: 15%}
+.noticeDiv{width: 100%;height: 100%;position: fixed;top:0;max-width: 480px;background-color: rgba(0,0,0,.8);font-size: 22px}
+.noticeDiv>div{width: 80%;background:url(../addons/xbd_activity/template/mobile/images/haibg.jpg);background-size: 100% 100%;margin: 20% auto;padding-top: 1px}
+.noticeDiv-con{width: 70%;margin-top: 13%;margin-left: 15%}
+.noticeDiv>div>a{width: 100%}
+.askadd{width: 60%}
+.egg{position: absolute;right: -1%;top: 32%;width: 40%}
+@media screen and (min-width: 375px) and (max-width: 413px) {
+.ask{top: 65%}
+.tohai{top: 65%}
+.egg{top: 30%}
+}
+@media screen and (min-width: 414px) {
+.ask{top: 65%}
+.egg{top: 28%}
+.tohai{top: 65%}
+}
+@media screen and (min-width: 480px) {
+.ask{top: 73%}
+.tohai{top: 73%}
+.zhaoji{margin-top: 10%}
+.egg{top: 35%}
+}
+.ask:active{width: 54%;left: 1%}
+.tohai:active{width: 54%;right: 3%}
+.askadd:active{width: 64%}
+/*rule*/
+#rule{width: 20%;position: absolute;left:13%;bottom: 10%}
+#rule:active{width: 30%}
+#dandan{width: 20%;position: absolute;right:13%;bottom: 10%}
+#dandan:active{width: 30%}
+#ruleDiv{position: fixed;top: 0;width: 100%;height: 100%;background:url(../addons/xbd_activity/template/mobile/images/haibg.jpg) no-repeat;background-size: 100% 100%;max-width: 480px}
+#ruleDiv>div{position: relative;height: 100%;text-align: center}
+.ruleCon{width: 90%;margin-top: 10%}
+#back{width: 60%;position: absolute;bottom: 0;left:20%}
+*{-webkit-tap-highlight-color:rgba(0,0,0,0)}
+</style>
+</head>
+<body>
+<div id="bodybox">
+<div class="load" id="load"><img src="../addons/xbd_activity/template/mobile/images/load.gif"><div class="txtAC"><img src="../addons/xbd_activity/template/mobile/images/load.png"></div></div>
+<div class="none" id="main">
+    <img class="hangfu" src="../addons/xbd_activity/template/mobile/images/hengfu.png"/>
+    <img class="du1" src="../addons/xbd_activity/template/mobile/images/du1.png"/>
+
+    <img class="egg" src="../addons/xbd_activity/template/mobile/images/egg1.gif"/>
+
+    <img class="zhaoji" src="../addons/xbd_activity/template/mobile/images/zhaoji.png"/>
+    <img class="ask" id="ask" src="../addons/xbd_activity/template/mobile/images/ask.png"/>
+    <img class="tohai" id="tohai" src="../addons/xbd_activity/template/mobile/images/tohai.png"/>
+    <div class="share txtAC none" id="share"><img src="http://wevein.qiniudn.com/xbd_activity5/template/mobile/images/share.png"/></div>
+    <img id="rule" src="http://wevein.qiniudn.com/xbd_activity3/template/mobile/images/rule.png"/>
+        <a href="http://sale.jd.com/m/act/UWzTKdjYvmEQM.html"><img id="dandan" src="http://wevein.qiniudn.com/xbd_activity3/template/mobile/images/dandan.png"/></a>
+    <div class="noticeDiv none" id="notice">
+        <div>
+            <img class="noticeDiv-con" src="../addons/xbd_activity/template/mobile/images/zihai.png" />
+            <a href="{php echo $this->createMobileUrl('bangdan', array('hid' => $hid,'pageid'=>3), true)}" class="txtAC disIB"><img class="askadd" src="../addons/xbd_activity/template/mobile/images/askadd.png"/></a>
+        </div>
+    </div>
+    <div class="noticeDiv none" id="notice2">
+        <div>
+            <img class="noticeDiv-con" src="../addons/xbd_activity/template/mobile/images/haiguo.png" />
+            <a href="{php echo $this->createMobileUrl('bangdan', array('hid' => $hid,'pageid'=>3), true)}" class="txtAC disIB"><img class="askadd" src="../addons/xbd_activity/template/mobile/images/askadd.png"/></a>
+        </div>
+    </div>
+    <!-- rule begin -->
+        <div class="none" id="ruleDiv"><div><img class="ruleCon" src="../addons/xbd_activity/template/mobile/images/ruleCon.png"/><img id="back" src="../addons/xbd_activity/template/mobile/images/back.png"></div></div>
+        <!-- end -->
+        </div>
+</div>
+</div>
+<script type="text/javascript">
+var a = document.getElementsByTagName('a');
+var img = document.getElementsByTagName('img');
+for(var i = 0; i < a.length; i++){
+  a[i].addEventListener('touchstart',function(){},false);
+}
+for(var i = 0; i < img.length; i++){
+  img[i].addEventListener('touchstart',function(){},false);
+}
+</script>
+<script>
+window.onload = function(){
+    setTimeout(function(){
+        document.getElementById("load").style.display = "none";
+        document.getElementById("main").style.display = "block";
+        var width = document.documentElement.clientWidth;
+        if(width <= 320){
+          var height = 1010 * (width / 640);
+          document.getElementById("bodybox").style.height = Math.floor(height) + 'px';
+        }
+
+        var askObj = document.getElementById("ask");
+        var shareObj = document.getElementById("share");
+        var tohaiObj = document.getElementById("tohai");
+        var noticeObj = document.getElementById("notice");
+        var noticeObj2 = document.getElementById("notice2");
+        askObj.onclick = function(){
+            shareObj.style.display = "block";
+        }
+        shareObj.onclick = function(){
+            shareObj.style.display = "none";
+        }
+        tohaiObj.onclick = function(){
+            var url = "{php echo $this->createMobileUrl('checkzihai',array('hid'=>$hid,'op'=>'post'), true)}";
+             $.ajax({
+                url: url, type: "post", dataType: "json", timeout: "10000",
+                data: {},
+                success: function (data) {
+                    if(data['message']['code']==1) {
+                       // 未自嗨过
+                        noticeObj.style.display = "block";
+                    }else if(data['message']['code']==2) { 
+                        noticeObj2.style.display = "block";
+                    }else {
+                        alert(data['message']['msg']);
+                    }
+                },
+                error: function (data) {
+                    alert("发送失败--!");
+                }
+            });
+        }
+        noticeObj.onclick = function(event){
+            if(event.target==this){
+                noticeObj.style.display = "none";
+            }
+        }
+        noticeObj2.onclick = function(event){
+            if(event.target==this){
+                noticeObj2.style.display = "none";
+            }
+        }
+        // 
+        var rule = document.getElementById("rule");
+        var ruleDiv = document.getElementById("ruleDiv");
+        rule.onclick = function(){
+            ruleDiv.style.display = "block";
+        }
+        ruleDiv.onclick = function(){
+            ruleDiv.style.display = "none";
+        }
+    },700);
+}
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);} || { jsApiList:[] };
+    // 是否启用调试
+    jssdkconfig.debug = false;
+
+    // 已经注册了 jssdk 文档中所有的接口
+    jssdkconfig.jsApiList = [
+      'checkJsApi',
+      'onMenuShareTimeline',
+      'onMenuShareAppMessage',
+      'onMenuShareQQ',
+      'onMenuShareWeibo',
+      'showOptionMenu'
+    ];          
+
+    var timestamp = Date.parse(new Date());
+    timestamp = timestamp / 1000;
+    wx.config(jssdkconfig);
+    wx.ready(function () {
+      wx.showOptionMenu();
+      //朋友
+      sharefunction();
+    });
+
+    function sharefunction() {
+        wx.onMenuShareAppMessage({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}&type=1&sharetime="+timestamp,
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+            transfer(1);
+        }
+      });
+
+      //朋友圈
+      wx.onMenuShareTimeline({
+        title : "{$huodong['sharefriendtitle']}",
+        link : "{$shareurl}&type=2",
+        desc : "{$huodong['sharefriendtitle']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+            transfer(2);
+        }
+      });
+      wx.onMenuShareQQ({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+            transfer(3);
+        }
+      });
+      wx.onMenuShareWeibo({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+            transfer(4);
+        }
+      });
+    }
+
+    function transfer(type) {
+        $.ajax({
+            url:"<?php echo $this->createMobileUrl('transfer',array ('hid' => $hid, 'weid' => $weid))?>",
+            data:{'type':type,'sharetime':timestamp},
+            type:'post',
+            dataType:'text',
+            success:function(msg){
+                timestamp = Date.parse(new Date());
+                timestamp = timestamp / 1000;
+                sharefunction();
+            }
+        });
+    }
+
+    wx.error(function (res) {
+      alert(res.errMsg);
+    });
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?6bf0ece0158b157ed325a3d8c0b75b35";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</body>
+</html>

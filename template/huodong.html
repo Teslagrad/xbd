@@ -1,0 +1,165 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li {if $operation == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('huodong', array('op' => 'post'))}">添加活动</a></li>
+    <li {if $operation == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('huodong', array('op' => 'display'))}">活动管理</a></li>
+</ul>
+{if $operation == 'display'}
+<style>
+    .form-control-excel {
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+</style>
+<div class="main">
+    <form action="./index.php" method="post" class="form-horizontal form" enctype="multipart/form-data">
+        <input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="xdb_activity" />
+        <input type="hidden" name="ac" value="huodong" />
+    </form>
+    <div style="padding-top:15px;"></div>
+    <div class="panel panel-default">
+        <div class="table-responsive panel-body">
+            <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:5%;">顺序</th>
+                        <th style="width:10%;">活动名称</th>
+                        <th style="width:25%;">活动时间</th>
+                        <th style="width:70%;">活动地址链接</th>
+                        <th style="width:15%;text-align: right;">管理/编辑/删除</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $huodonglist $item}
+                    <tr>
+                        <td>{$item['displayorder']}</td>
+                        <td>
+                            <div class="type-parent">{$item['title']}&nbsp;&nbsp;
+                                {if $item['enabled']==1}
+                                <span class='label label-success'>显示</span>
+                                {else}
+                                <span class='label label-danger'>隐藏</span>
+                                {/if}   
+                            </div>
+                        </td>
+                        <td>{php echo date('Y-m-d H:i',$item['starttime'])."-".date('Y-m-d H:i',$item['endtime'])}</td>
+                        <td>{php echo $_W['siteroot'].'app/'.$this->createMobileUrl('index',array('hid'=>$item['id'],'pageid'=>1));}</td>
+                        <td style="max-width:60px;text-align: right;">
+                            <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('attender', array('id' => $item['id'], 'hid' =>  $item['id']))}" title="管理"><i class="fa fa-cog"></i></a>
+                            <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('huodong', array('id' => $item['id'], 'hid' =>  $item['id'], 'op' => 'post'))}" title="编辑"><i class="fa fa-pencil"></i></a>
+                            <a class="btn btn-default btn-sm" onclick="return confirm('确认删除吗？');return false;" href="{php echo $this->createWebUrl('huodong', array('id' => $item['id'], 'hid' =>  $item['id'], 'op' => 'delete'))}" title="删除"><i class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+                    {/loop}
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </form>
+        </div>
+    </div>
+    {$pager}
+</div>
+<script>
+    function drop_confirm(msg, url){
+        if(confirm(msg)){
+            window.location = url;
+        }
+    }
+</script>
+{elseif $operation == 'post'}
+</style>
+<div class="main">
+    <form action="" method="post" onsubmit="return check();" class="form-horizontal form" enctype="multipart/form-data">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                活动详细设置
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">顺序</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="displayorder" value="{$reply['displayorder']}" id="displayorder" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动名称</label>
+                    <div class="col-sm-9">
+                         <input type="text" name="title" value="{$reply['title']}" id="title" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动时间</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_form_field_daterange('time', array('starttime'=>date('Y-m-d H:i', $starttime),'endtime'=>date('Y-m-d H:i', $endtime)),true);}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">是否进行</label>
+                    <div class="col-sm-9">
+                        <label class="radio-inline">
+                            <input type="radio" name="enabled" value="1" {if $reply['enabled']==1 || empty($reply)}checked{/if}>进行
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="enabled" value="0" {if isset($reply['enabled']) && empty($reply['enabled'])}checked{/if}>停止
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享好友页面标题</label>
+                    <div class="col-sm-9">
+                         <input type="text" name="sharetitle" value="{$reply['sharetitle']}" id="sharetitle" class="form-control" />
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享好友页面描述</label>
+                    <div class="col-sm-9">
+                         <input type="text" name="sharecontent" value="{$reply['sharecontent']}" id="sharecontent" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享朋友圈页面标题</label>
+                    <div class="col-sm-9">
+                         <input type="text" name="sharefriendtitle" value="{$reply['sharefriendtitle']}" id="sharefriendtitle" class="form-control" />
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享页面Logo</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_form_field_image('shareimage', $reply['shareimage'])}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+            <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function check() {
+        if($.trim($('#title').val()) == '') {
+            message('没有输入活动名称.', '', 'error');
+            return false;
+        }
+        return true;
+    }
+</script>
+  
+{/if}
+{template 'common/footer'}

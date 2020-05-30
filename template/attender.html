@@ -1,0 +1,288 @@
+{template 'common/header'}
+{php echo $this -> set_tabbar($action, $hid);}
+{if $operation == 'display'}
+<div class="main">
+        <div class="panel panel-info">
+            <div class="panel-heading">筛选
+        </div>
+        <div class="panel-body">
+            <form action="./index.php" method="get" class="form-horizontal" role="form" id="form0">
+                <input type="hidden" name="c" value="site" />
+                <input type="hidden" name="a" value="entry" />
+                <input type="hidden" name="m" value="xbd_activity" />
+                <input type="hidden" name="do" value="attender" />
+                <input type="hidden" name="hid" value="{$hid}" />
+                <input type="hidden" id="isexport" name="isexport" value="0" />
+                <input type="hidden" name="status" value="{$status}"/>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label" style="width: 100px;">用户昵称</label>
+                    <div class="col-sm-2 col-lg-2">
+                        <input class="form-control" name="nickname" id="" type="text" value="{$_GPC['nickname']}">
+                    </div>
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label" style="width: 100px;">时间区域</label>
+                    <div class="col-sm-2 col-lg-2">
+                        {php echo tpl_form_field_daterange('time', array('starttime'=>date('Y-m-d H:i', $starttime),'endtime'=>date('Y-m-d H:i', $endtime)),true);}
+                    </div>
+                    <div class="col-sm-2 col-lg-2">
+                    </div>
+                    <div class="col-sm-2 col-lg-2">
+                        <button class="btn btn-default" id="search"><i class="fa fa-search"></i> 搜索</button>
+                    </div>
+                    <div class="col-sm-2 col-lg-2">
+                        <button type="submit" class="btn btn-default" id="export"><i class="fa fa-table"></i> 导出</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+    $(function(){
+        $('#export').click(function(){
+            $("#isexport").val(1);
+        });
+        $('#search').click(function(){
+            $("#isexport").val(0);
+        });
+    });
+    </script>
+    <style>
+        .page-nav {
+            margin: 0;
+            width: 100%;
+            min-width: 800px;
+        }
+
+        .page-nav > li > a {
+            display: block;
+        }
+
+        .page-nav-tabs {
+            background: #EEE;
+        }
+
+        .page-nav-tabs > li {
+            line-height: 40px;
+            float: left;
+            list-style: none;
+            display: block;
+            text-align: -webkit-match-parent;
+        }
+
+        .page-nav-tabs > li > a {
+            font-size: 14px;
+            color: #666;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 10px;
+            margin: 0;
+            border: 1px solid transparent;
+            border-bottom-width: 0px;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+        }
+
+        .page-nav-tabs > li > a, .page-nav-tabs > li > a:focus {
+            border-radius: 0 !important;
+            background-color: #f9f9f9;
+            color: #999;
+            margin-right: -1px;
+            position: relative;
+            z-index: 11;
+            border-color: #c5d0dc;
+            text-decoration: none;
+        }
+
+        .page-nav-tabs >li >a:hover {
+            background-color: #FFF;
+        }
+
+        .page-nav-tabs > li.active > a, .page-nav-tabs > li.active > a:hover, .page-nav-tabs > li.active > a:focus {
+            color: #576373;
+            border-color: #c5d0dc;
+            border-top: 2px solid #4c8fbd;
+            border-bottom-color: transparent;
+            background-color: #FFF;
+            z-index: 12;
+            margin-top: -1px;
+            box-shadow: 0 -2px 3px 0 rgba(0, 0, 0, 0.15);
+        }
+    </style>
+    <input type="hidden" name="storeid" value="{$storeid}" />
+    <ul class="page-nav page-nav-tabs" style="background:none;float: left;margin-left: 0px;padding-left: 0px;border-bottom:1px #c5d0dc solid;">
+        <li{if empty($_GPC['status']) || $_GPC['status']==0} class="active"{/if}>        
+            <a title="点击过活动的用户，包含未参与或以参与活动的用户和已帮朋友加油或未帮朋友加油的用户" href="{php echo $this->createWebUrl('attender', array('op' => 'display', 'status' => 0, 'hid' => $hid,'time'=>$time))}">{if $total == ''}0{else}{$total}{/if} 位用户点击活动</a>
+        </li>
+        <li{if $_GPC['status']==1} class="active"{/if}>
+        <a title="未自嗨或未分享用户，包含未帮朋友加油或已帮加油的用户" href="{php echo $this->createWebUrl('attender', array('op' => 'display', 'status' => 1, 'hid' => $hid,'time'=>$time))}" >{if $total1 == ''}0{else}{$total1}{/if} 位用户未参与</a>
+        </li>
+        <li{if $_GPC['status']==2} class="active"{/if}>
+        <a title="已自嗨或已分享用户，包含未帮朋友加油或已帮加油的用户" href="{php echo $this->createWebUrl('attender', array('op' => 'display', 'status' => 2, 'hid' => $hid,'time'=>$time))}">{if $total2 == ''}0{else}{$total2}{/if} 位用户已参与</a>
+        </li>
+        <li{if $_GPC['status']==3} class="active"{/if}>
+        <a title="未帮朋友加油用户，包含未参与或已参与活动的用户" href="{php echo $this->createWebUrl('attender', array('op' => 'display', 'status' => 3, 'hid' => $hid,'time'=>$time))}">{if $total3 == ''}0{else}{$total3}{/if} 位用户未加油</a>
+        </li>
+        <li{if $_GPC['status']==4} class="active"{/if}>
+        <a title="已帮朋友加油用户，包含未参与或已参与活动的用户" href="{php echo $this->createWebUrl('attender', array('op' => 'display', 'status' => 4, 'hid' => $hid,'time'=>$time))}">{if $total4 == ''}0{else}{$total4}{/if} 位用户已加油</a>
+        </li>
+        <li{if $_GPC['status']==5} class="active"{/if}>
+        <a title="活动发起人，有可能该用户已参与过朋友发起的活动" href="{php echo $this->createWebUrl('attender', array('op' => 'display', 'status' => 5, 'hid' => $hid,'time'=>$time))}">{if $total5 == ''}0{else}{$total5}{/if} 位发起人</a>
+        </li>
+        <li{if $_GPC['status']==6} class="active"{/if}>
+        <a title="活动参与者，有可能该用户已发起过活动" href="{php echo $this->createWebUrl('attender', array('op' => 'display', 'status' => 6, 'hid' => $hid,'time'=>$time))}">{if $total6 == ''}0{else}{$total6}{/if} 位参与者</a>
+        </li>
+        <li{if $_GPC['status']==7} class="active"{/if}>
+        <a title="活动发起人又是参与者" href="{php echo $this->createWebUrl('attender', array('op' => 'display', 'status' => 7, 'hid' => $hid,'time'=>$time))}">{if $total7 == ''}0{else}{$total7}{/if} 位发起参与者</a>
+        </li>
+        <li{if $_GPC['status']==7} class="active"{/if}>
+        <a title="获取兑换码的用户" href="{php echo $this->createWebUrl('attender', array('op' => 'display', 'status' => 8, 'hid' => $hid,'time'=>$time))}">{if $total8 == ''}0{else}{$total8}{/if} 位用户获取兑换码</a>
+        </li>
+        
+    </ul>
+    &nbsp;
+    <div class="panel panel-default">
+        <form action="" method="post" class="form-horizontal form" >
+        <input type="hidden" name="storeid" value="{$storeid}" />
+        <div class="table-responsive panel-body">
+            <table class="table table-hover">
+                <thead class="navbar-inner">
+                <tr>
+                    <th style="width:4%;">ID</th>
+                    <th style="width:6%;">头像</th>
+                    <th style="width:10%;">昵称</th>
+                    <th style="width:8%;">性别</th>
+                    <th style="width:8%;">地区</th>
+                    <th style="width:8%;">是否加油</th>
+                    <th style="width:8%;">是否参与</th>
+                    <th style="width:18%;">创建时间</th>
+                    <th style="width:8%;">当前温度</th>
+                    <th style="width:10%;">免单随机码</th>
+                    <th style="width:8%;">被加油次数</th>
+                    <th style="width:8%;">阅读次数</th>
+                    <th style="width:10%;">分享朋友次数</th>
+                    <th style="width:10%;">转发朋友圈次数</th>
+                    <th style="width:10%;">朋友圈阅读次数</th>
+                    <th style="width:12%; text-align:right;">查看/删除/拉黑</th>
+                </tr>
+                </thead>
+                <tbody>
+                {loop $list $item}
+                <tr>
+                    <td>{$item['id']}</td>
+                    <td><img src="{if !empty($item['headimgurl'])}{$item['headimgurl']}{else}resource/images/noavatar_middle.gif{/if}" width="48"></td>
+                    <td>{$item['nickname']}</td>
+                    <td>{if $item['sex']==1}男{elseif $item['sex']==2}女{else}未知{/if}</td>
+                    <td>{if $item['country']!=null}{$item['country']}/{$item['province']}/{$item['city']}{/if}</td>
+                    <td>{if $item['isjiayou'] == 1}是{else}否{/if}</td>
+                    <td>{if $item['isjoin'] == 1}是{else}否{/if}</td>
+                    <td>{php echo date('Y-m-d H:i:s', $item['createtime'])}</td>
+                    <td>{$item['degree']}℃</td>
+                    <td>{$item['code']}</td>
+                    <td>{$item['helptimes']}</td>
+                    <td>{$item['readtimes']}</td>
+                    <td>{$item['sharetimes']}</td>
+                    <td>{$item['transfertimes']}</td>
+                    <td>{$item['transferreadtimes']}</td>
+                    <td style="text-align:right;">
+                        <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('attender', array('op' => 'detail', 'id' => $item['id'], 'hid' => $hid))}" title="查看/编辑用户"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('attender', array('op' => 'delete', 'id' => $item['id'], 'hid' => $hid))}" title="删除用户" onclick="return confirm('此操作不可恢复，确认删除？');return false;"><i class="fa fa-times"></i></a>
+                        {if !empty($blacklist[$item['from_user']])}
+                        <a class="btn btn-default btn-sm" style="color:red;" href="{php echo $this->createWebUrl('attender', array('op' => 'black', 'id' => $item['id'], 'hid' => $hid))}" title="拉黑名单"><i class="fa fa-trash"></i></a>
+                        {else}
+                        <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('attender', array('op' => 'black', 'id' => $item['id'], 'hid' => $hid))}" title="拉黑名单"><i class="fa fa-trash"></i></a>
+                        {/if}
+                    </td>
+                </tr>
+                {/loop}
+                </tbody>
+            </table>
+            {$pager}
+        </div>
+    </div>
+    </form>
+</div>
+{elseif $operation=='detail'}
+<div class="main">
+    <form class="form-horizontal form" action="" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{$attender[id]}">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                用户信息
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">用户头像</label>
+                    <div class="col-sm-9">
+                        <img src="{if !empty($attender['headimgurl'])}{$attender['headimgurl']}{else}resource/images/noavatar_middle.gif{/if}" width="48">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">用户昵称</label>
+                    <div class="col-sm-9">
+                        <p class="form-control">{$attender['nickname']}
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">当前度数</label>
+                    <div class="col-sm-9">
+                        <p class="form-control">{$attender['degree']}</p>
+                    </div>
+                </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {$total} 条加油记录
+            </div>
+            <div class="table-responsive panel-body">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+                <tr>
+                    <th style="width:4%;">加油ID</th>
+                    <th style="width:6%;">头像</th>
+                    <th style="width:6%;">昵称</th>
+                    <th style="width:8%;">性别</th>
+                    <th style="width:6%;">地区</th>
+                    <th style="width:8%;">是否参与</th>
+                    <th style="width:8%;">当前温度</th>
+                    <th style="width:8%;">加温度数</th>
+                    <th style="width:15%;">加油时间</th>
+                    <th style="width:8%;">免单随机码</th>
+                    <th style="width:8%;">被加油次数</th>
+                    <th style="width:8%;">阅读次数</th>
+                    <th style="width:10%;">分享朋友次数</th>
+                    <th style="width:10%;">转发朋友圈次数</th>
+                    <th style="width:10%;">朋友圈阅读次数</th>
+                </tr>
+            </thead>
+            {loop $attender['supporters'] $row}
+            <tr>
+               <td>{$row['rid']}</td>
+                <td><img src="{if !empty($row['headimgurl'])}{$row['headimgurl']}{else}resource/images/noavatar_middle.gif{/if}" width="48"></td>
+                <td>{$row['nickname']}</td>
+                <td>{if $row['sex']==1}男{elseif $row['sex']==2}女{else}未知{/if}</td>
+                <td>{if $row['country']!=null}{$row['country']}/{$row['province']}/{$row['city']}{/if}</td>
+                <td>{if $row['isjoin'] == 1}是{else}否{/if}</td>
+                <td>{$row['degree']}℃</td>
+                <td>{$row['helpdegree']}℃</td>
+                <td>{php echo date('Y-m-d H:i:s', $row['helptime'])}</td>
+                <td>{$row['code']}</td>
+                <td>{$row['helptimes']}</td>
+                <td>{$row['readtimes']}</td>
+                <td>{$row['sharetimes']}</td>
+                <td>{$row['transfertimes']}</td>
+                <td>{$row['transferreadtimes']}</td>
+            </tr>
+            {/loop}
+        </table>
+        {$pager}
+        </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <button type="submit" class="btn btn-primary span2" onclick="return confirm('确认修改此用户吗？'); return false;" name="confrim" onclick="" value="完成">确认修改</button>
+            <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+    </form>
+</div>
+{/if}
+{template 'common/footer'}

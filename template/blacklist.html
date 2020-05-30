@@ -1,0 +1,62 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li {if $operation == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('blacklist', array('op' => 'display'))}">黑名单管理</a></li>
+</ul>
+{if $operation == 'display'}
+<div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+        <!--<a class="btn btn-primary" href="{php echo $this->createWebUrl('area', array('op' => 'post', 'storeid' => $storeid))}"><i class="icon-plus"></i>添加区域</a>-->
+        <a class="btn btn-primary" href="javascript:location.reload()"><i class="icon-refresh"></i>刷新</a>
+        <div style="padding-top: 15px;"></div>
+    </form>
+    <div class="panel panel-default">
+        <form action="" method="post" class="form-horizontal form" >
+            <input type="hidden" name="storeid" value="{$storeid}" />
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                     <tr>
+                        <th style="width:4%;">ID</th>
+                        <th style="width:6%;">头像</th>
+                        <th style="width:10%;">昵称</th>
+                        <th style="width:8%;">性别</th>
+                        <th style="width:10%;">地区</th>
+                        <th style="width:12%;">是否参与</th>
+                        <th style="width:8%;">当前温度</th>
+                        <th style="width:10%;">免单随机码</th>
+                        <th style="width:8%;">被加油次数</th>
+                        <th style="width:8%;">阅读次数</th>
+                        <th style="width:10%;">分享朋友次数</th>
+                        <th style="width:10%;">转发朋友圈次数</th>
+                        <th style="width:5%; text-align:right;">解除</th>
+                    </tr>
+                    </thead>
+                    <tbody id="level-list">
+                    {loop $list $item}
+                    <tr>
+                        <td>{$item['id']}</td>
+                        <td><img src="{if !empty($item['headimgurl'])}{$item['headimgurl']}{else}resource/images/noavatar_middle.gif{/if}" width="48"></td>
+                        <td>{$item['nickname']}</td>
+                        <td>{if $item['sex']==1}男{elseif $item['sex']==2}女{else}未知{/if}</td>
+                        <td>{if $item['country']!=null}{$item['country']}/{$item['province']}/{$item['city']}{/if}</td>
+                        <td>{if $item['isjoin'] == 1}是{else}否{/if}</td>
+                        <td>{$item['degree']}℃</td>
+                        <td>{$item['code']}</td>
+                        <td>{$item['helptimes']}</td>
+                        <td>{$item['readtimes']}</td>
+                        <td>{$item['sharetimes']}</td>
+                        <td>{$item['transfertimes']}</td>
+                        <td style="text-align:right;">
+                            <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('blacklist', array('op' => 'black', 'id' => $item['bid']))}" title="拉黑名单" onclick="return confirm('此操作不可恢复，确认？');return false;"><i class="fa fa-remove"></i></a>
+                        </td>
+                    </tr>
+                    {/loop}    
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+    {$pager}
+</div>
+{/if}
+{template 'common/footer'}

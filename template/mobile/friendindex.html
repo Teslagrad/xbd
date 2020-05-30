@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>小笨蛋</title>
+<link rel="stylesheet" href="../addons/xbd_activity/template/mobile/css/common.css">
+<script type="text/javascript" src="../addons/xbd_activity/template/mobile/js/jQuery.js"></script>
+
+<style>
+@media screen and (max-width:320px){body{margin:0;padding:0;width:100%;background:#fff}#bodybox{position:relative;margin:0 auto;background:url(../addons/xbd_activity/template/mobile/images/bg2.jpg) no-repeat;background-size:100% 100%;overflow:hidden;max-width:480px}}@media screen and (min-width:321px){html,body{margin:0;padding:0;width:100%;height:100%;background:#fff}#bodybox{position:relative;margin:0 auto;height:100%;background:url(../addons/xbd_activity/template/mobile/images/bg2.jpg) no-repeat;background-size:100% 100%;overflow:hidden;max-width:480px}}
+.head{margin-top: 15%}
+.head>img{width: 25%;border-radius: 50%;-webkit-box-shadow:0 0 10px #000;box-shadow:0 0 10px #000}
+.nickname{padding: 10px 0;font-size: 20px;font-weight: bolder}
+.sildebar{position: relative}
+#slidebarbg{width: 80%}
+.sildebar>span{position: absolute;left: 43%;top: 25%;font-size: 26px;color: red}
+#slidebtn{position: absolute;top:0;left:0;width: 8%}
+#slideDiv{position: relative;width: 80%;margin: -22% auto}
+.tips{margin-top: 30%;font-weight: bold;font-size: 20px;}
+.fonttype{font-family:Hanzipen;}
+.fontcolor{color: #0066FF;}
+#surebtn{width: 52%;margin-left: 23%}
+.showTxt{position: fixed;top: 0;width: 100%;height: 100%;background-color: rgba(0,0,0,.8);display:none;max-width: 480px;text-align: center}
+.showTxt>img{margin-top: 30%}
+.width70{width: 70%}
+.width50{width: 50%}
+#value{font-family:Hanzipen}
+@media screen and (max-width:320px){.tips{font-size: 14px}}
+@media screen and (min-width: 321px) and (max-width: 374px) {
+.tips{font-size: 16px}
+}
+@media screen and (min-width: 375px) and (max-width: 413px) {
+}
+@media screen and (min-width: 414px) {
+}
+@media screen and (min-width: 480px) {
+}
+#surebtn:active{width: 56%;margin-left: 22%}
+/*rule*/
+#rule{width: 23%;position: absolute;left: 5%;bottom: 12%}
+#rule:active{width: 30%}
+#dandan{width: 23%;position: absolute;right: 5%;bottom: 12%}
+#dandan:active{width: 30%}
+#ruleDiv{position: fixed;top: 0;width: 100%;height: 100%;background:url(../addons/xbd_activity/template/mobile/images/haibg.jpg) no-repeat;background-size: 100% 100%;max-width: 480px}
+#ruleDiv>div{position: relative;height: 100%;text-align: center}
+.ruleCon{width: 90%;margin-top: 10%}
+#back{width: 60%;position: absolute;bottom: 0;left:20%}
+*{-webkit-tap-highlight-color:rgba(0,0,0,0)}
+</style>
+</head>
+<body>
+<div id="bodybox">
+    <div class="load" id="load"><img src="../addons/xbd_activity/template/mobile/images/load.gif"><div class="txtAC"><img src="../addons/xbd_activity/template/mobile/images/load.png"></div></div>
+    <div class="none" id="main">
+        <div class="txtAC head"><img src="{$transfer_attender['headimgurl']}"/></div>
+        <div class="txtAC nickname">{$transfer_attender['nickname']}</div>
+        <div class="txtAC sildebar">
+            <img id="slidebarbg" src="../addons/xbd_activity/template/mobile/images/slidebar.png"/>
+            <span id="value"></span>
+        </div>
+        <div id="slideDiv"><img class="handle" id="slidebtn" src="../addons/xbd_activity/template/mobile/images/slide.png"/></div>
+        <div class="txtAC tips">
+            <span class="fonttype">帮</span>
+            <span class="fontcolor">{$transfer_attender['nickname']}</span>
+            <span class="fonttype">加温到100度,</span></br>
+            <span class="fonttype" style="line-height:2.5;">他就可以拿1296元的初生蛋免单哒。</span>
+        </div>
+        <img id="surebtn" src="../addons/xbd_activity/template/mobile/images/sure.png"/>
+        <img id="rule" src="http://wevein.qiniudn.com/xbd_activity3/template/mobile/images/rule.png"/>
+        <a href="http://sale.jd.com/m/act/UWzTKdjYvmEQM.html"><img id="dandan" src="http://wevein.qiniudn.com/xbd_activity3/template/mobile/images/dandan.png"/></a>
+
+        <!-- 表情框 -->
+        <div class="showTxt"></div>
+
+    </div>
+    <!-- rule begin -->
+    <div class="none" id="ruleDiv"><div><img class="ruleCon" src="../addons/xbd_activity/template/mobile/images/ruleCon.png"/><img id="back" src="../addons/xbd_activity/template/mobile//images/back.png"></div></div>
+    <!-- end -->
+</div>
+<script type="text/javascript">
+var a = document.getElementsByTagName('a');
+var img = document.getElementsByTagName('img');
+for(var i = 0; i < a.length; i++){
+  a[i].addEventListener('touchstart',function(){},false);
+}
+for(var i = 0; i < img.length; i++){
+  img[i].addEventListener('touchstart',function(){},false);
+}
+</script>
+<script src="../addons/xbd_activity/template/mobile/js/dragdealer.js"></script>
+<script>
+window.onload = function(){
+    setTimeout(function(){
+        document.getElementById("load").style.display = "none";
+        document.getElementById("main").style.display = "block";
+    
+        var width = document.documentElement.clientWidth;
+        var slideBarW = document.getElementById("slideDiv").offsetWidth;
+        var surebtn = document.getElementById("surebtn");
+        var txtObj = document.getElementsByClassName("showTxt")[0];
+
+        if(width <= 320){
+          var height = 1010 * (width / 640);
+          document.getElementById("bodybox").style.height = Math.floor(height) + 'px';
+        }
+
+        // scroll
+        var valNum = 0;
+        var valObj = document.getElementById("value");
+        var drag = new Dragdealer('slideDiv', {
+            loose:false,
+            animationCallback: function(x, y) {
+                valNum = -5+Math.round(x * 10);
+                if(valNum>0){
+                    valObj.innerText = '+'+valNum+'度';
+                }else{
+                    valObj.innerText = valNum+'度';
+                }
+            }
+        });
+        setTimeout(function(){
+            drag.setValue(1,0,false);
+        },700);
+        /*
+        setTimeout(function(){
+            drag.setValue(0.5,0,false);
+        },2000);
+        */
+        surebtn.onclick = function(){
+            if(parseInt("{$count}") >= 100) {
+                window.location.href = "{php echo $this->createMobileUrl('over', array('hid' => $hid,'transfer_openid'=>base64_encode($transfer_openid),'pageid'=>7), true)}"+"&valNum="+valNum;
+            }else {
+                if(valNum==0) {
+                    txtObj.innerHTML = '<img class="width70" src="../addons/xbd_activity/template/mobile/images/4.png"/>';
+                        txtObj.style.display = "block";
+                        setTimeout(function(){
+                            txtObj.style.display = "none";
+                        },1500);
+                }else {
+                    if(valNum == -5){
+                        txtObj.innerHTML = '<img class="width70" src="../addons/xbd_activity/template/mobile/images/1.png"/>';
+                        txtObj.style.display = "block";
+                    }else if(valNum == -3 || valNum == -4){
+                        txtObj.innerHTML = '<img class="width70" src="../addons/xbd_activity/template/mobile/images/2.png"/>';
+                        txtObj.style.display = "block";
+                    }else if(valNum == -1 || valNum == -2){
+                        txtObj.innerHTML = '<img class="width70" src="../addons/xbd_activity/template/mobile/images/3.png"/>';
+                        txtObj.style.display = "block";
+                    }else if(valNum == 1 || valNum == 2){
+                        txtObj.innerHTML = '<img class="width50" src="../addons/xbd_activity/template/mobile/images/5.png"/>';
+                        txtObj.style.display = "block";
+                    }else if(valNum == 3 || valNum == 4){
+                        txtObj.innerHTML = '<img class="width50" src="../addons/xbd_activity/template/mobile/images/6.png"/>';
+                        txtObj.style.display = "block";
+                    }else if(valNum == 5){
+                        txtObj.innerHTML = '<img class="width50" src="http://wevein.qiniudn.com/xbd_activity3/template/mobile/images/7.png"/>';
+                        txtObj.style.display = "block";
+                    }
+                    var url="{php echo $this->createMobileUrl('jiayou',array('hid'=>$hid,'op'=>'post','transfer_openid'=>base64_encode($transfer_openid),'pageid'=>5), true)}"+"&valNum="+valNum;
+                    $.ajax({
+                        url: url, type: "post", dataType: "json", timeout: "10000",
+                        data: {},
+                        success: function (data) {
+                            if(data['message']['code']==1) {
+                                setTimeout(function(){
+                                    window.location.href = "{php echo $this->createMobileUrl('jiayou', array('hid' => $hid,'transfer_openid'=>base64_encode($transfer_openid),'pageid'=>5), true)}"+"&valNum="+valNum;
+                                    },1500);
+                            }else{
+                                alert(data['message']['msg']);
+                            }
+                        },
+                        error: function (data) {
+                            
+                        }
+                    });
+                }
+            }
+        }
+        txtObj.onclick = function(){
+            txtObj.style.display = "none";
+        }
+        var rule = document.getElementById("rule");
+        var ruleDiv = document.getElementById("ruleDiv");
+        rule.onclick = function(){
+            ruleDiv.style.display = "block";
+        }
+        ruleDiv.onclick = function(){
+            ruleDiv.style.display = "none";
+        }
+    
+    },700);
+}
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);} || { jsApiList:[] };
+    // 是否启用调试
+    jssdkconfig.debug = false;
+
+    // 已经注册了 jssdk 文档中所有的接口
+    jssdkconfig.jsApiList = [
+      'checkJsApi',
+      'onMenuShareTimeline',
+      'onMenuShareAppMessage',
+      'onMenuShareQQ',
+      'onMenuShareWeibo',
+      'showOptionMenu'
+    ];          
+
+    wx.config(jssdkconfig);
+    wx.ready(function () {
+      wx.showOptionMenu();
+      //朋友
+      wx.onMenuShareAppMessage({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+         //   transfer(1);
+        }
+      });
+
+      //朋友圈
+      wx.onMenuShareTimeline({
+        title : "{$huodong['sharefriendtitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharefriendtitle']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+          //  transfer(2);
+        }
+      });
+      wx.onMenuShareQQ({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+          //  transfer(3);
+        }
+      });
+      wx.onMenuShareWeibo({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+         //   transfer(4);
+        }
+      });
+    });
+
+    function transfer(type) {
+        $.ajax({
+            url:"<?php echo $this->createMobileUrl('transfer',array ('hid' => $hid, 'weid' => $weid, 'sharetime'=>$sharetime))?>",
+            data:{'type':type},
+            type:'post',
+            dataType:'text',
+            success:function(msg){
+            }
+        });
+    }
+
+    wx.error(function (res) {
+      alert(res.errMsg);
+    });
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?9011e67fd20f69a3a1a6e3f8dcc95fad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body>
+</html>

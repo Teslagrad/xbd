@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>小笨蛋</title>
+<link rel="stylesheet" href="../addons/xbd_activity/template/mobile/css/common.css">
+<script type="text/javascript" src="../addons/xbd_activity/template/mobile/js/jQuery.js"></script>
+<style>
+@media screen and (max-width:320px){body{margin:0;padding:0;width:100%;background:#fff}#bodybox{position:relative;margin:0 auto;background:url(../addons/xbd_activity/template/mobile/images/bg2.jpg) no-repeat;background-size:100% 100%;overflow:hidden;max-width:480px}}@media screen and (min-width:321px){html,body{margin:0;padding:0;width:100%;height:100%;background:#fff}#bodybox{position:relative;margin:0 auto;height:100%;background:url(../addons/xbd_activity/template/mobile/images/bg2.jpg) no-repeat;background-size:100% 100%;overflow:hidden;max-width:480px}}
+.duNum{position: absolute;left: 42%;top: 15.5%;font-size: 20px;font-family:Hanzipen}
+.scrollDiv{height: 85%;overflow-y: scroll;position: relative;}
+.cha{width: 80%;margin-left: 10%;margin-top: 15%}
+.du1{width: 100%}
+.bang{width: 100%;margin-top: 5%}
+.share{position: fixed;max-width: 480px;top: 0;width: 100%;height: 100%;background-color: rgba(0,0,0,.8)}
+.share>img{width: 80%;margin-top: 15%}
+.rankDiv{width: 80%;margin: 0 auto;margin-bottom: 10%;}
+.rankCon{width: 90%;margin: 0 auto;margin-bottom: 7px}
+.rankCon>img{height: 35px;border-radius: 50%}
+.rankCon>div{height: 35px;line-height: 35px}
+.rankname{width: 45%;margin-left:7%}
+.rankdu{width: 25%}
+.ask{width: 50%;position: absolute;left: 3%;bottom: 7%}
+.tohai{width: 50%;position: absolute;right: 3%;bottom: 7%}
+.noticeDivss{width: 100%;height: 100%;position: fixed;top:0;max-width: 480px;background-color: rgba(0,0,0,.8)}
+.noticeDivss>div{width: 80%;background:url(../addons/xbd_activity/template/mobile/images/haibg.jpg);background-size: 100% 100%;margin: 30% auto;padding:20% 0;text-align: center;}
+.noticeDivss>div>img{width: 80%}
+/**/
+.noticeDiv{width: 100%;height: 100%;position: fixed;top:0;max-width: 480px;background-color: rgba(0,0,0,.8)}
+.noticeDiv>div{width: 80%;background:url(../addons/xbd_activity/template/mobile/images/haibg.jpg);background-size: 100% 100%;margin: 20% auto;padding-top: 1px}
+.noticeDiv-con{width:70%;margin-top: 13%;margin-left: 15%}
+.askadd{width: 60%;margin-left: 20%}
+#main{height: 100%}
+.egg{position: absolute;right: -1%;top: 20%;width: 40%}
+#arrow{position: absolute;left:0;top: 0;width: 7%}
+.container {
+  width: 60%;
+  height: 45px;
+  margin-left: 5%;margin-top: 2%;
+  padding-top: 4.1%;padding-left: 3%;
+  background: url(../addons/xbd_activity/template/mobile/images/du1.png) no-repeat;
+  background-size: 100% 100%;
+}
+.progress {
+  width: 90%;
+  position: relative;
+}
+.arrow {
+  position: absolute;
+  width: 15px;
+  top: -20px;
+  left: 0;
+}
+.progress-img {
+  position: relative;
+  float: left;
+  margin: 1px -1px;
+  height: 15px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px
+}
+.progress-img:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 15px;
+  background: url("../addons/xbd_activity/template/mobile/images/du.png") 0 0 repeat-x;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px
+}
+@media screen and (min-width: 321px) and (max-width: 374px){
+    .duNum{top: 15.5%;left: 42%}
+}
+@media screen and (min-width: 375px) and (max-width: 413px) {
+    .duNum{left: 42%;top: 15%}
+    .egg{top: 18%}
+}
+@media screen and (min-width: 414px) and (max-width: 639px){
+    .duNum{top: 15%;left: 42%}
+    .egg{top: 17%}
+}
+@media screen and (min-width: 480px) {
+    .duNum{top: 18%;left: 42%;font-size: 30px}
+}
+.ask:active{width: 54%;left: 1%}
+.tohai:active{width: 54%;right: 2%}
+.askadd:active{width: 64%;margin-left: 18%}
+/*rule*/
+#rule{width: 20%;position: absolute;left:11%;bottom: 7%}
+#rule:active{width: 30%}
+#dandan{width: 20%;position: absolute;right:11%;bottom: 7%}
+#dandan:active{width: 30%}
+#ruleDiv{position: fixed;top: 0;width: 100%;height: 100%;background:url(../addons/xbd_activity/template/mobile/images/haibg.jpg) no-repeat;background-size: 100% 100%;max-width: 480px}
+#ruleDiv>div{position: relative;height: 100%;text-align: center}
+.ruleCon{width: 90%;margin-top: 10%}
+#back{width: 60%;position: absolute;bottom: 0;left:20%}
+*{-webkit-tap-highlight-color:rgba(0,0,0,0)}
+</style>
+</head>
+<body>
+<div id="bodybox">
+    <div class="load" id="load"><img src="../addons/xbd_activity/template/mobile/images/load.gif"><div class="txtAC"><img src="../addons/xbd_activity/template/mobile/images/load.png"/></div></div>
+    <div class="none" id="main">
+        <div class="scrollDiv">
+            <span class="red duNum" id="duNum">{$degree}</span>
+            <img class="cha" src="../addons/xbd_activity/template/mobile/images/cha.png"/>
+
+            <section class="container">
+              <div class="progress">
+                <span class="progress-img" style="width:0%;"></span>
+                <img class="arrow" src="../addons/xbd_activity/template/mobile/images/arrow.png" />
+              </div>
+            </section>
+
+            <img class="egg" id="egg" />
+
+            <div class="rankDiv">
+                <img class="bang" src="../addons/xbd_activity/template/mobile/images/bang.png"/>
+                <!-- loop begin -->
+                {loop $records $r}
+                <div class="rankCon ovfl">
+                    <img class="floL" src="{$r['friend']['headimgurl']}"/>
+                    <div class="floL rankname nowrap">{$r['friend']['nickname']}</div>
+                    <div class="floR rankdu nowrap">{if $r['degree']>0}+{$r['degree']}{else}{$r['degree']}{/if}℃</div>
+                </div>
+                {/loop}
+                <!-- end -->
+            </div>
+        </div>
+        <img class="ask" id="ask" src="../addons/xbd_activity/template/mobile/images/ask.png"/>
+        <img class="tohai" id="tohai" src="../addons/xbd_activity/template/mobile/images/tohai.png"/>
+		    <img id="rule" src="http://wevein.qiniudn.com/xbd_activity3/template/mobile/images/rule.png"/>
+        <a href="http://sale.jd.com/m/act/UWzTKdjYvmEQM.html"><img id="dandan" src="http://wevein.qiniudn.com/xbd_activity3/template/mobile/images/dandan.png"/></a>
+    </div>
+    <div class="share txtAC none" id="share"><img src="http://wevein.qiniudn.com/xbd_activity5/template/mobile/images/share.png"/></div>
+
+    <!-- 未嗨过 -->
+    <div class="noticeDiv none" id="notice">
+        <div>
+            <img class="noticeDiv-con" src="../addons/xbd_activity/template/mobile/images/zihai.png"/>
+            <img class="askadd" src="../addons/xbd_activity/template/mobile/images/askadd.png"/>
+        </div>
+    </div>
+    <!-- 嗨过 -->
+    <div class="noticeDivss none" id="noticess">
+        <div><img src="../addons/xbd_activity/template/mobile/images/haiguo.png"/></div>
+    </div>
+    <!-- rule begin -->
+    <div class="none" id="ruleDiv"><div><img class="ruleCon" src="../addons/xbd_activity/template/mobile/images/ruleCon.png"/><img id="back" src="../addons/xbd_activity/template/mobile/images/back.png"></div></div>
+    <!-- end -->
+</div>
+<script type="text/javascript">
+var a = document.getElementsByTagName('a');
+var img = document.getElementsByTagName('img');
+for(var i = 0; i < a.length; i++){
+  a[i].addEventListener('touchstart',function(){},false);
+}
+for(var i = 0; i < img.length; i++){
+  img[i].addEventListener('touchstart',function(){},false);
+}
+</script>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script>
+window.onload = function(){
+    setTimeout(function(){
+        document.getElementById("load").style.display = "none";
+        document.getElementById("main").style.display = "block";
+        var width = document.documentElement.clientWidth;
+        if(width <= 320){
+          var height = 1010 * (width / 640);
+          document.getElementById("bodybox").style.height = Math.floor(height) + 'px';
+        }
+
+        var askObj = document.getElementById("ask");
+        var shareObj = document.getElementById("share");
+        var haiObj = document.getElementById("tohai");
+        var noticeDiv = document.getElementById("notice");
+        var noticeDivss = document.getElementById("noticess");
+        var duNum = document.getElementById("duNum").innerText;
+        var egg = document.getElementById("egg");
+        var askadd = document.getElementsByClassName("askadd")[0];
+        var duCount = 100-duNum;
+        // 温标指示度数
+        loading(duCount);
+
+        if(duCount<30){
+            egg.src = "../addons/xbd_activity/template/mobile/images/egg1.gif";
+        }else if(duCount>=30 && duCount<40){
+            egg.src = "../addons/xbd_activity/template/mobile/images/egg2.gif";
+        }else if(duCount>=40 && duCount<50){
+            egg.src = "../addons/xbd_activity/template/mobile/images/egg3.gif";
+        }else if(duCount>=50 && duCount<70){
+            egg.src = "../addons/xbd_activity/template/mobile/images/egg4.gif";
+        }else if(duCount>=70 && duCount<100){
+            egg.src = "../addons/xbd_activity/template/mobile/images/egg5.gif";
+        }else if(duCount == 100){
+            egg.src = "../addons/xbd_activity/template/mobile/images/egg6.gif";
+        }
+
+        askObj.onclick = function(){
+            shareObj.style.display = "block";
+        }
+        shareObj.onclick = function(){
+            shareObj.style.display = "none";
+        }
+        haiObj.onclick = function(){
+            var url = "{php echo $this->createMobileUrl('checkzihai',array('hid'=>$hid,'op'=>'post'), true)}";
+             $.ajax({
+                url: url, type: "post", dataType: "json", timeout: "10000",
+                data: {},
+                success: function (data) {
+                    if(data['message']['code']==1) {
+                       // 未自嗨过
+                        noticeDiv.style.display = "block";
+                    }else if(data['message']['code']==2) { 
+                        noticeDivss.style.display = "block";
+                    }else {
+                        alert(data['message']['msg']);
+                    }
+                },
+                error: function (data) {
+                    alert("发送失败--!");
+                }
+            });
+        }
+        noticeDiv.onclick = function(){
+            noticeDiv.style.display = "none";
+        }
+        noticeDivss.onclick = function(){
+            noticeDivss.style.display = "none";
+        }
+        askadd.onclick = function(){
+            shareObj.style.display = "block";
+        }
+        // 
+        var rule = document.getElementById("rule");
+        var ruleDiv = document.getElementById("ruleDiv");
+        rule.onclick = function(){
+            ruleDiv.style.display = "block";
+        }
+        ruleDiv.onclick = function(){
+            ruleDiv.style.display = "none";
+        }
+    },700);
+}
+function loading(percent){
+    $('.progress-img').animate({width:parseInt(percent)+5+"%"},1000);
+    if(parseInt(percent)==0){
+        $(".arrow").animate({left:(parseInt(percent)+"%")},1000);
+    }else{
+        $(".arrow").animate({left:(parseInt(percent)-2+"%")},1000);
+    }
+}
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);} || { jsApiList:[] };
+    // 是否启用调试
+    jssdkconfig.debug = false;
+
+    // 已经注册了 jssdk 文档中所有的接口
+    jssdkconfig.jsApiList = [
+      'checkJsApi',
+      'onMenuShareTimeline',
+      'onMenuShareAppMessage',
+      'onMenuShareQQ',
+      'onMenuShareWeibo',
+      'showOptionMenu'
+    ];          
+
+    var timestamp = Date.parse(new Date());
+    timestamp = timestamp / 1000;
+    wx.config(jssdkconfig);
+    wx.ready(function () {
+      wx.showOptionMenu();
+      //朋友
+      sharefunction();
+    });
+
+    function sharefunction() {
+        wx.onMenuShareAppMessage({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}&type=1&sharetime="+timestamp,
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+            transfer(1);
+        }
+      });
+
+      //朋友圈
+      wx.onMenuShareTimeline({
+        title : "{$huodong['sharefriendtitle']}",
+        link : "{$shareurl}&type=2",
+        desc : "{$huodong['sharefriendtitle']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+            transfer(2);
+        }
+      });
+      wx.onMenuShareQQ({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+            transfer(3);
+        }
+      });
+      wx.onMenuShareWeibo({
+        title : "{$huodong['sharetitle']}",
+        link : "{$shareurl}",
+        desc : "{$huodong['sharecontent']}",
+        imgUrl :"{$_W['siteroot']}attachment/{$huodong['shareimage']}",
+        success: function () { 
+            transfer(4);
+        }
+      });
+    }
+
+    function transfer(type) {
+        $.ajax({
+            url:"<?php echo $this->createMobileUrl('transfer',array ('hid' => $hid, 'weid' => $weid))?>",
+            data:{'type':type,'sharetime':timestamp},
+            type:'post',
+            dataType:'text',
+            success:function(msg){
+                timestamp = Date.parse(new Date());
+                timestamp = timestamp / 1000;
+                sharefunction();
+            }
+        });
+    }
+
+    wx.error(function (res) {
+      alert(res.errMsg);
+    });
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?9011e67fd20f69a3a1a6e3f8dcc95fad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</body>
+</html>

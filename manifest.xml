@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.6">
+<application setting="false">
+    <name><![CDATA[微活动]]></name>
+    <identifie><![CDATA[xbd_activity]]></identifie>
+    <version><![CDATA[3.1.9]]></version>
+    <type><![CDATA[activity]]></type>
+    <ability><![CDATA[微活动]]></ability>
+    <description><![CDATA[微活动]]></description>
+    <author><![CDATA[创懿]]></author>
+    <url><![CDATA[]]></url>
+</application>
+<platform>
+    <handles>
+        <message type="text" />
+    </handles>
+    <rule embed="false" />
+</platform>
+<bindings>
+    <menu>
+        <entry title="活动管理" do="huodong" />
+        <entry title="黑名单" do="blacklist" />
+    </menu>
+</bindings>
+<install><![CDATA[
+      CREATE TABLE IF NOT EXISTS `ims_xbd_activity_huodong` (
+        `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+        `weid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属帐号',
+        `title` varchar(50) NOT NULL COMMENT '活动名称',
+        `displayorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+        `desc` varchar(500) NOT NULL COMMENT '描述',
+        `enabled` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否开启',
+        `starttime` int(11) unsigned NOT NULL COMMENT '开始时间',
+        `endtime` int(11) unsigned NOT NULL COMMENT '结束时间', 
+        `sharetitle` text COMMENT '分享标题',
+        `sharefriendtitle` text COMMENT '朋友圈分享标题',
+        `sharecontent` text COMMENT '分享内容',
+        `shareimage` text COMMENT '分享图片', 
+        PRIMARY KEY (`id`)
+      ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+      CREATE TABLE IF NOT EXISTS `ims_xbd_activity_attender` (
+        `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+        `weid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属帐号',
+        `hid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '活动编号', 
+        `unionid` varchar(200) NOT NULL DEFAULT '' COMMENT 'unionid',
+        `openid` varchar(200) NOT NULL DEFAULT '' COMMENT 'openid',
+        `name` varchar(50) NOT NULL DEFAULT '' COMMENT '奖品名称',
+        `isjiayou` int(1) NOT NULL DEFAULT '0',
+        `isjoin` int(1) NOT NULL DEFAULT '0',
+        `ispost` int(1) NOT NULL DEFAULT '0',
+        `isshare` int(1) NOT NULL DEFAULT '0',
+        `iszihai` int(1) NOT NULL DEFAULT '0',
+        `degree` int(3) NOT NULL DEFAULT '0',
+        `code` varchar(8) NOT NULL DEFAULT '' COMMENT '兑换码',
+        `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '用户姓名',
+        `sex` varchar(50) NOT NULL DEFAULT '' COMMENT '性别',
+        `province` varchar(50) NOT NULL DEFAULT '' COMMENT '性别',
+        `country` varchar(50) NOT NULL DEFAULT '' COMMENT '性别',
+        `city` varchar(50) NOT NULL DEFAULT '' COMMENT '联系电话',
+        `createtime` int(11) NOT NULL DEFAULT '0',
+        `headimgurl` varchar(500) NOT NULL DEFAULT '' COMMENT '头像url',
+        `readtimes` int(10) DEFAULT 0 COMMENT '阅读次数',
+        `sharetimes` int(10) DEFAULT 0 COMMENT '转发次数',
+        `transfertimes` int(10) DEFAULT 0 COMMENT '分享到朋友圈次数',
+        `transferreadtimes` int(10) DEFAULT 0 COMMENT '转发阅读次数',
+        PRIMARY KEY (`id`)
+      ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+      CREATE TABLE IF NOT EXISTS `ims_xbd_activity_attender_his` (
+        `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+        `weid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属帐号',
+        `hid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '活动编号', 
+        `unionid` varchar(200) NOT NULL DEFAULT '' COMMENT 'unionid',
+        `openid` varchar(200) NOT NULL DEFAULT '' COMMENT 'openid',
+        `name` varchar(50) NOT NULL DEFAULT '' COMMENT '奖品名称',
+        `isjiayou` int(1) NOT NULL DEFAULT '0',
+        `isjoin` int(1) NOT NULL DEFAULT '0',
+        `ispost` int(1) NOT NULL DEFAULT '0',
+        `isshare` int(1) NOT NULL DEFAULT '0',
+        `iszihai` int(1) NOT NULL DEFAULT '0',
+        `degree` int(3) NOT NULL DEFAULT '0',
+        `code` varchar(8) NOT NULL DEFAULT '' COMMENT '兑换码',
+        `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '用户姓名',
+        `sex` varchar(50) NOT NULL DEFAULT '' COMMENT '性别',
+        `province` varchar(50) NOT NULL DEFAULT '' COMMENT '性别',
+        `country` varchar(50) NOT NULL DEFAULT '' COMMENT '性别',
+        `city` varchar(50) NOT NULL DEFAULT '' COMMENT '联系电话',
+        `createtime` int(11) NOT NULL DEFAULT '0',
+        `headimgurl` varchar(500) NOT NULL DEFAULT '' COMMENT '头像url',
+        `readtimes` int(10) DEFAULT 0 COMMENT '阅读次数',
+        `sharetimes` int(10) DEFAULT 0 COMMENT '转发次数',
+        `transfertimes` int(10) DEFAULT 0 COMMENT '分享到朋友圈次数',
+        `transferreadtimes` int(10) DEFAULT 0 COMMENT '转发阅读次数',
+        PRIMARY KEY (`id`)
+      ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+      CREATE TABLE IF NOT EXISTS `ims_xbd_activity_transfer` (
+        `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+        `weid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属帐号',
+        `hid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '活动编号',
+        `from_user` varchar(200) NOT NULL DEFAULT '' COMMENT '用户openid',
+        `friend_openid` varchar(200) NOT NULL DEFAULT '' COMMENT '用户openid',
+        `createtime` int(11) NOT NULL DEFAULT '0',
+        `sharetime` int(11) NOT NULL DEFAULT '0',
+        `type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '类型',
+        PRIMARY KEY (`id`)
+      ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+      CREATE TABLE IF NOT EXISTS `ims_xbd_activity_record` (
+        `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+        `weid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属帐号',
+        `hid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '活动编号',
+        `from_user` varchar(200) NOT NULL DEFAULT '' COMMENT '用户openid',
+        `target_from_user` varchar(200) NOT NULL DEFAULT '' COMMENT '受用用户openid',
+        `degree` int(3) NOT NULL DEFAULT '0' COMMENT '',
+        `createtime` int(11) NOT NULL DEFAULT '0',
+        PRIMARY KEY (`id`)
+      ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+      CREATE TABLE IF NOT EXISTS `ims_xbd_activity_blacklist` (
+          `id` int(10) NOT NULL AUTO_INCREMENT,
+          `weid` int(10) unsigned NOT NULL,
+          `hid` int(10) unsigned NOT NULL,
+          `from_user` varchar(100) DEFAULT '' COMMENT '用户ID',
+          `friend_openid` varchar(100) DEFAULT '' COMMENT '朋友用户ID',
+          `status` tinyint(1) unsigned NOT NULL DEFAULT '0',
+          `dateline` int(10) DEFAULT '0' COMMENT '创建时间',
+          PRIMARY KEY (`id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+        CREATE TABLE IF NOT EXISTS `ims_xbd_activity_pagerate` (
+          `id` int(10) NOT NULL AUTO_INCREMENT,
+          `weid` int(10) unsigned NOT NULL,
+          `hid` int(10) unsigned NOT NULL,
+          `imgurl` varchar(500) NOT NULL DEFAULT '' COMMENT 'url',
+          `pageid` int(10) unsigned NOT NULL COMMENT '页面id',
+          `clicktimes` int(10) DEFAULT '0' COMMENT '点击次数',
+          PRIMARY KEY (`id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+    ]]></install>
+<uninstall><![CDATA[]]></uninstall>
+<upgrade><![CDATA[upgrade.php]]></upgrade>
+</manifest>
